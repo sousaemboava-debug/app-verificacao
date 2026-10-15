@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recrutamento Militar - Far Cry Style</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Fundo de Savana em Guerra (Canvas) -->
+    <canvas id="savanaCanvas"></canvas>
+    <div class="glow-overlay"></div>
+
+    <!-- 1. Tela de Introdução / Boot Animada -->
+    <div id="introScreen" class="intro-screen">
+        <div class="intro-content">
+            <div class="warning-badge">SETOR MILITAR DE RECRUTAMENTO</div>
+            <h1 class="glitch-title" data-text="SISTEMA DE AVALIAÇÃO">SISTEMA DE AVALIAÇÃO</h1>
+            <p class="typewriter-text">INICIALIZANDO PROTOCOLO DE TRIAGEM...</p>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <button id="btnStart" class="btn-far-cry">ACESSAR SISTEMA</button>
+        </div>
+    </div>
+
+    <!-- 2. Formulário Principal (Surge após animação) -->
+    <main id="mainContainer" class="container hidden">
+        <div class="card-glass">
+            <div class="card-header">
+                <span class="status-dot"></span>
+                <h2>SISTEMA DE TRIAGEM</h2>
+                <span class="code-id">FC-2026 // AVALIAÇÃO</span>
+            </div>
+
+            <form id="formCandidato">
+                <div class="input-group">
+                    <label for="nome">NOME COMPLETO</label>
+                    <input type="text" id="nome" required placeholder="Digite seu nome militar..." autocomplete="off">
+                </div>
+
+                <div class="input-group">
+                    <label for="idade">IDADE (ANOS)</label>
+                    <input type="number" id="idade" min="0" max="120" required placeholder="Ex: 22" autocomplete="off">
+                </div>
+
+                <div class="input-group">
+                    <label for="altura">ALTURA (METROS)</label>
+                    <input type="number" id="altura" step="0.01" min="0" max="3.00" required placeholder="Ex: 1.75" autocomplete="off">
+                </div>
+
+                <button type="submit" class="btn-far-cry btn-submit">
+                    <span>ANALISAR CREDENCIAIS</span>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- 3. Janela Popup Modal para Resposta -->
+    <div id="modalResultado" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div id="modalHeader" class="modal-header">
+                <h3 id="modalTitle">STATUS DA AVALIAÇÃO</h3>
+            </div>
+            <div class="modal-body">
+                <div id="modalIcon" class="modal-icon"></div>
+                <p id="modalMessage" class="modal-message"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnCloseModal" class="btn-far-cry">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

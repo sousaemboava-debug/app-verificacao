@@ -1,0 +1,349 @@
+/* CSS - Far Cry Style: Dark Mode + Amarelo + Glassmorphism + Luzes de Guerra */
+
+:root {
+    --bg-dark: #0a0c0e;
+    --fc-yellow: #ffcc00;
+    --fc-yellow-glow: rgba(255, 204, 0, 0.4);
+    --fc-red: #ff2a2a;
+    --fc-red-glow: rgba(255, 42, 42, 0.4);
+    --fc-green: #00ff66;
+    --fc-green-glow: rgba(0, 255, 102, 0.4);
+    --glass-bg: rgba(15, 18, 22, 0.75);
+    --glass-border: rgba(255, 204, 0, 0.25);
+    --text-color: #f0f3f6;
+    --text-muted: #8a99a8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Canvas de Fundo (Savana em Guerra) */
+#savanaCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Overlay de Brilho Ambience e Vinheta */
+.glow-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, transparent 40%, rgba(5, 5, 5, 0.85) 90%),
+                linear-gradient(to top, rgba(255, 80, 0, 0.15), transparent 60%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ---------------- TELA DE INTRO / BOOT ---------------- */
+.intro-screen {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background: rgba(8, 10, 12, 0.92);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.intro-content {
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.warning-badge {
+    background: var(--fc-yellow);
+    color: #000;
+    font-weight: 900;
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+}
+
+.glitch-title {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px var(--fc-yellow-glow);
+    position: relative;
+}
+
+.typewriter-text {
+    color: var(--fc-yellow);
+    font-family: monospace;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--fc-yellow);
+    box-shadow: 0 0 10px var(--fc-yellow);
+    transition: width 0.3s ease;
+}
+
+/* ---------------- CONTAINER PRINCIPAL ---------------- */
+.container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 440px;
+    padding: 20px;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.container.hidden {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    pointer-events: none;
+}
+
+/* Card Glassmorphism estilo militar */
+.card-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 32px 28px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(255, 204, 0, 0.08),
+                inset 0 0 15px rgba(255, 204, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--fc-yellow), transparent);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 204, 0, 0.15);
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--fc-yellow);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--fc-yellow);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.card-header h2 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #fff;
+}
+
+.code-id {
+    font-size: 0.7rem;
+    font-family: monospace;
+    color: var(--fc-yellow);
+    opacity: 0.8;
+}
+
+/* Form Inputs */
+.input-group {
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+}
+
+.input-group input {
+    background: rgba(5, 8, 12, 0.6);
+    border: 1px solid rgba(255, 204, 0, 0.2);
+    border-radius: 6px;
+    padding: 14px 16px;
+    color: #fff;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--fc-yellow);
+    box-shadow: 0 0 15px var(--fc-yellow-glow);
+    background: rgba(10, 15, 22, 0.8);
+}
+
+/* Botões Estilo Far Cry */
+.btn-far-cry {
+    position: relative;
+    background: var(--fc-yellow);
+    color: #000;
+    border: none;
+    padding: 14px 28px;
+    font-size: 0.9rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+    box-shadow: 0 0 20px var(--fc-yellow-glow);
+}
+
+.btn-far-cry:hover {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.btn-far-cry:active {
+    transform: translateY(1px);
+}
+
+.btn-submit {
+    width: 100%;
+    margin-top: 10px;
+    padding: 16px;
+}
+
+/* ---------------- MODAL POPUP ---------------- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.modal-card {
+    background: var(--glass-bg);
+    border-radius: 12px;
+    max-width: 420px;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay:not(.hidden) .modal-card {
+    transform: scale(1);
+}
+
+/* Estilos dinâmicos do Modal (Aprovado / Reprovado) */
+.modal-card.aprovado {
+    border: 2px solid var(--fc-green);
+    box-shadow: 0 0 40px var(--fc-green-glow);
+}
+
+.modal-card.reprovado {
+    border: 2px solid var(--fc-red);
+    box-shadow: 0 0 40px var(--fc-red-glow);
+}
+
+.modal-header h3 {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.modal-card.aprovado .modal-header h3 { color: var(--fc-green); }
+.modal-card.reprovado .modal-header h3 { color: var(--fc-red); }
+
+.modal-icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+}
+
+.modal-message {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: #e0e5eb;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .card-glass { padding: 24px 18px; }
+    .glitch-title { font-size: 1.6rem; }
+}
